@@ -1,3 +1,4 @@
+<!-- Your existing index.ejs content -->
 <h1>Welcome to CSE Motors!</h1>
 
 <section id="hero">
@@ -13,20 +14,11 @@
         </li>
     </ul>
 </section>
-<div class="flex-content">
-    <section id="review">
-        <h2>DMC Delorean Reviews</h2>
-        <ul>
-            <li>"So fast it's almost like traveling in time." (4/5)</li>
-            <li>"Coolest ride on the road." (4/5)</li>
-            <li>"I'm feeling McFly!" (5/5)</li>
-            <li>"The most futuristic ride of our day." (4.5/5)</li>
-            <li>"80's livin and I love it!" (5/5)</li>
-        </ul>
-    </section>
-    <section id="add-ons">
+
+<div class="grid-container">
+    <section id="add-ons" class="upgrades-section">
         <h2>Delorean Upgrades</h2>
-        <div class="flex">
+        <div class="upgrades-grid">
             <a href="#" title="flux-capacitor">
                 <figure>
                     <div class="add-col">
@@ -43,15 +35,10 @@
                     <figcaption>Flame Decals</figcaption>
                 </figure>
             </a>
-        </div>
-        <div class="flex">
             <a href="#" title="bumper stickers">
                 <figure>
                     <div class="add-col">
-                        <img
-                                src="./images/upgrades/bumper_sticker.jpg"
-                                alt="Bumper Stickers"
-                        />
+                        <img src="./images/upgrades/bumper_sticker.jpg" alt="Bumper Stickers" />
                     </div>
                     <figcaption>Bumper Stickers</figcaption>
                 </figure>
@@ -66,4 +53,19 @@
             </a>
         </div>
     </section>
+    
+    <section id="review" class="reviews-section">
+        <h2>DMC Delorean Reviews</h2>
+        <ul>
+            <li>"So fast it's almost like traveling in time." (4/5)</li>
+            <li>"Coolest ride on the road." (4/5)</li>
+            <li>"I'm feeling McFly!" (5/5)</li>
+            <li>"The most futuristic ride of our day." (4.5/5)</li>
+            <li>"80's livin and I love it!" (5/5)</li>
+        </ul>
+    </section>
 </div>
+
+<!-- footer -->
+
+<footer></footer>

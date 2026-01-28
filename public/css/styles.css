@@ -26,7 +26,7 @@ body {
   background-color: var(--primary-background);
   margin-left: auto;
   margin-right: auto;
-  padding-bottom: 1em;
+  padding-bottom: 0.5em;
 }
 
 /* BEGIN header.ejs styles */
@@ -81,7 +81,9 @@ nav li {
 
 /* BEGIN footer.ejs style */
 footer {
-  margin-top: 2rem;
+  margin-top: 1rem;
+  padding: 0.5rem 0;
+  clear: both;
 }
 
 footer p {
@@ -115,6 +117,8 @@ h2 {
   margin-left: auto;
   margin-right: auto;
   display: flex;
+  width: 80%;
+  margin-bottom: 2em;
 }
 
 #hero h2 {
@@ -164,7 +168,83 @@ h2 {
   opacity: 0.5;
 }
 
-/* For Delorian list */
+/* Two-column grid layout */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Upgrades section (LEFT column) */
+.upgrades-section {
+  margin-bottom: 0;
+}
+
+.upgrades-section h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+/* Upgrades grid - maintains 2 items per row */
+.upgrades-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.upgrades-grid a {
+  text-decoration: none;
+  color: var(--primary-text);
+}
+
+.upgrades-grid figure {
+  margin: 0;
+}
+
+.upgrades-grid figcaption {
+  text-align: center;
+  margin-top: 0.5rem;
+  font-size: 0.9em;
+}
+
+.upgrades-grid .add-col {
+  background-color: var(--main-accent);
+  height: 5.5em;
+  width: 100%;
+  border: var(--primary-text) solid 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upgrades-grid img {
+  display: block;
+  max-height: 4em;
+  width: auto;
+}
+
+/* Reviews section (RIGHT column) */
+.reviews-section {
+  margin-bottom: 0;
+}
+
+.reviews-section h2 {
+  margin-top: 0;
+}
+
+.reviews-section ul {
+  padding-left: 1.5rem;
+  margin-bottom: 0;
+}
+
+.reviews-section li {
+  font-size: 0.9em;
+  margin-bottom: 1em;
+}
+
+/* For Delorean list in reviews section */
 section ul {
   padding: 0 0 0 1rem;
 }
@@ -174,6 +254,7 @@ section ul {
   margin-bottom: 1em;
 }
 
+/* Original flex styles (kept for compatibility) */
 .flex {
   display: flex;
   margin-bottom: 2em;
@@ -211,6 +292,11 @@ section {
   margin-bottom: 2em;
   margin-top: 1em;
 }
+
+/* Remove the old .flex-content styles */
+.flex-content {
+  display: none;
+}
 /* END index.ejs styles */
 
 @media only screen and (min-width: 768px) {
@@ -230,6 +316,7 @@ section {
     padding: 1vw;
     width: 75vw;
     max-width: 1200px;
+    padding-bottom: 0.5em;
   }
 
   /* BEGIN header.ejs styles */
@@ -272,6 +359,46 @@ section {
     color: var(--primary-text);
     font-weight: 800;
     font-size: large;
+  }
+
+  /* Two-column grid layout for desktop */
+  .grid-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 2rem;
+  }
+  
+  /* This keeps the visual order as: Upgrades (left), Reviews (right) */
+  .upgrades-section {
+    grid-column: 1;
+  }
+  
+  .reviews-section {
+    grid-column: 2;
+  }
+  
+  .reviews-section ul {
+    padding-left: 2rem;
+  }
+  
+  .reviews-section li {
+    font-size: 1em;
+  }
+  
+  .upgrades-grid {
+    gap: 1.5rem;
+  }
+  
+  .upgrades-grid figcaption {
+    font-size: 1em;
+  }
+  
+  .upgrades-grid .add-col {
+    height: 7em;
+  }
+  
+  .upgrades-grid img {
+    max-height: 5em;
   }
   /* END index.ejs styles */
 }
