@@ -615,3 +615,201 @@ section {
     padding: 1.2rem;
   }
 }
+
+/* Flash Messages */
+ul.notice, ul.error, ul.success {
+  padding: 0.75rem 1.25rem;
+  margin: 0 0 1.5rem;
+  border-radius: 6px;
+  list-style: none;
+}
+
+ul.notice {
+  background: #d1ecf1;
+  color: #0c5460;
+  border: 1px solid #bee5eb;
+}
+
+ul.error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+ul.success {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+/* Account Forms */
+form#loginForm,
+form#registerForm {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+form fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+form legend {
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  color: var(--primary-text);
+  font-weight: 700;
+}
+
+form label {
+  display: block;
+  margin: 1.2rem 0 0.4rem;
+  font-weight: 600;
+  color: var(--primary-text);
+}
+
+form input[type="email"],
+form input[type="password"],
+form input[type="text"] {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+form .btn {
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.text-center a {
+  color: var(--main-accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.text-center a:hover {
+  text-decoration: underline;
+}
+
+/* Password Toggle */
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-container input {
+  padding-right: 2.5rem;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #666;
+}
+
+.toggle-password:hover {
+  color: var(--main-accent);
+}
+
+/* Password Requirements */
+.password-requirements {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.password-requirements ul {
+  margin: 0.3rem 0 0 1.2rem;
+  padding: 0;
+}
+
+.password-requirements li {
+  margin-bottom: 0.2rem;
+}
+
+/* Password Toggle */
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-container input {
+  padding-right: 2.5rem;
+  width: 100%;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #666;
+}
+
+.toggle-password:hover {
+  color: var(--main-accent);
+}
+
+/* Password Requirements */
+.password-requirements {
+  margin: 0.5rem 0 1rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.password-requirements ul {
+  margin: 0.3rem 0 0 1.2rem;
+  padding: 0;
+}
+
+.password-requirements li {
+  margin-bottom: 0.2rem;
+  line-height: 1.3;
+}
+
+/* Client-Side Validation Styling */
+input:required:invalid,
+input:focus:invalid {
+  border: 2px solid #e74c3c;
+  background-color: #fdf2f2;
+}
+
+input:required:valid {
+  border: 2px solid #2ecc71;
+  background-color: #f2fdf5;
+}
+
+/* Server-Side Validation Errors */
+ul.error {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 0.75rem 1.25rem;
+  margin: 0 0 1.5rem;
+  border: 1px solid #f5c6cb;
+  border-radius: 6px;
+  list-style: none;
+}
+
+ul.error li {
+  margin-bottom: 0.3rem;
+}

@@ -1,0 +1,21 @@
+<h1><%- title %></h1>
+<%- messages() %>
+
+<div class="management-links">
+  <a href="/inv/add-classification" class="btn primary">Add New Classification</a>
+  <a href="/inv/add-inventory" class="btn secondary">Add New Vehicle</a>
+</div>
+
+<style>
+.management-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.management-links a {
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+}
+</style>

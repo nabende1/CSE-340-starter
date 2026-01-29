@@ -1,0 +1,24 @@
+<h1><%- title %></h1>
+<%- messages() %>
+
+<% if (locals.errors) { %>
+  <ul class="error">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<form action="/inv/add-classification" method="POST">
+  <label for="classification_name">Classification Name *</label>
+  <p>Must contain only letters and numbers (no spaces or special characters)</p>
+  <input 
+    type="text" 
+    name="classification_name" 
+    id="classification_name" 
+    required
+    pattern="[a-zA-Z0-9]+"
+    value="<%= typeof locals.classification_name !== 'undefined' ? locals.classification_name : '' %>"
+  >
+  <button type="submit" class="btn primary">Add Classification</button>
+</form>

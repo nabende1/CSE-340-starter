@@ -1,0 +1,64 @@
+<!-- views/account/login.ejs -->
+<h1><%- title %></h1>
+
+<% if (locals.errors) { %>
+  <ul class="error">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<%- messages() %>
+
+<form action="/account/login" method="POST" id="loginForm">
+  <fieldset>
+    <legend>Log in to your account</legend>
+    
+    <label for="account_email">Email Address *</label>
+    <input 
+      type="email" 
+      name="account_email" 
+      id="account_email" 
+      required
+      placeholder="example@domain.com"
+    >
+
+    <label for="account_password">Password *</label>
+    <div class="password-container">
+      <input 
+        type="password" 
+        name="account_password" 
+        id="account_password" 
+        required
+        minlength="12"
+        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+        title="Password must be at least 12 characters with uppercase, number, and special character"
+      >
+      <button type="button" id="togglePassword" class="toggle-password">👁️</button>
+    </div>
+    <div class="password-requirements">
+      Password must be:
+      <ul>
+        <li>At least 12 characters</li>
+        <li>1 uppercase, 1 number, 1 special character</li>
+      </ul>
+    </div>
+
+    <button type="submit" class="btn primary">Login</button>
+  </fieldset>
+</form>
+
+<p class="text-center">
+  Don't have an account? 
+  <a href="/account/register" title="Register for an account">Register here</a>.
+</p>
+
+<script>
+  document.getElementById('togglePassword').addEventListener('click', function() {
+    const passwordField = document.getElementById('account_password');
+    const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordField.setAttribute('type', type);
+    this.textContent = type === 'password' ? '👁️' : '🔒';
+  });
+</script>

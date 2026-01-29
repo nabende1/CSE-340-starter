@@ -1,0 +1,82 @@
+<!-- views/account/register.ejs -->
+<h1><%- title %></h1>
+
+<%- messages() %>
+
+<% if (locals.errors) { %>
+  <ul class="error">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<form action="/account/register" method="POST" id="registerForm">
+  <fieldset>
+    <legend>Create Your Account</legend>
+    
+    <label for="account_firstname">First Name *</label>
+    <input 
+  type="text" 
+  name="account_firstname" 
+  id="account_firstname" 
+  required
+  value="<%= typeof locals.account_firstname !== 'undefined' ? locals.account_firstname : '' %>"
+>
+
+
+    <label for="account_lastname">Last Name *</label>
+    <input 
+  type="text" 
+  name="account_lastname" 
+  id="account_lastname" 
+  required
+  value="<%= typeof locals.account_lastname !== 'undefined' ? locals.account_lastname : '' %>"
+>
+
+    <label for="account_email">Email Address *</label>
+    <input 
+  type="email" 
+  name="account_email" 
+  id="account_email" 
+  required
+  placeholder="example@domain.com"
+  value="<%= typeof locals.account_email !== 'undefined' ? locals.account_email : '' %>"
+>
+    <label for="account_password">Password *</label>
+    <div class="password-container">
+      <input 
+        type="password" 
+        name="account_password" 
+        id="account_password" 
+        required
+        minlength="12"
+        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+        title="Password must be at least 12 characters with uppercase, number, and special character"
+      >
+      <button type="button" id="togglePassword" class="toggle-password">👁️</button>
+    </div>
+    <div class="password-requirements">
+      Password must be:
+      <ul>
+        <li>At least 12 characters long</li>
+        <li>Contain 1 uppercase letter (A-Z)</li>
+        <li>Contain 1 lowercase letter (a-z)</li>
+        <li>Contain 1 number (0-9)</li>
+        <li>Contain 1 special character (!@#$%^&*)</li>
+        <li>No spaces allowed</li>
+      </ul>
+    </div>
+
+    <button type="submit" class="btn primary">Register</button>
+  </fieldset>
+</form>
+
+<script>
+  document.getElementById('togglePassword').addEventListener('click', function() {
+    const passwordField = document.getElementById('account_password');
+    const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordField.setAttribute('type', type);
+    this.textContent = type === 'password' ? '👁️' : '🔒';
+  });
+</script>
