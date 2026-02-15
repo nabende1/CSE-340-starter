@@ -6,16 +6,12 @@
   <a href="/inv/add-inventory" class="btn secondary">Add New Vehicle</a>
 </div>
 
-<style>
-.management-links {
-  display: flex;
-  gap: 1rem;
-  margin-top: 2rem;
-}
-.management-links a {
-  padding: 0.75rem 1.5rem;
-  text-decoration: none;
-  border-radius: 4px;
-  font-weight: 600;
-}
-</style>
+<h2>Manage Inventory</h2>
+<p>Select a classification from the list below to see inventory items:</p>
+
+<%- classificationSelect %>
+
+<table id="inventoryDisplay"></table>
+<noscript>JavaScript must be enabled to use this page.</noscript>
+
+<script src="/js/inventory.js"></script>

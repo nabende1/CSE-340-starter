@@ -1,0 +1,17 @@
+<h1><%- title %></h1>
+<%- messages() %>
+
+<% if (locals.loggedin) { %>
+  <h2>Welcome <%= accountData.account_firstname %></h2>
+  
+  <!-- Update account link for all users -->
+  <p><a href="/account/update/<%= accountData.account_id %>" class="btn secondary">Update Account Information</a></p>
+  
+  <!-- Inventory management for Employee/Admin only -->
+  <% if (accountData.account_type === "Employee" || accountData.account_type === "Admin") { %>
+    <h3>Inventory Management</h3>
+    <p><a href="/inv" class="btn primary">Manage Inventory</a></p>
+  <% } %>
+<% } else { %>
+  <p>Please log in to access your account.</p>
+<% } %>

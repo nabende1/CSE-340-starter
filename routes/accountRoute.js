@@ -3,15 +3,22 @@ const express = require("express");
 const router = express.Router();
 const accountController = require("../controllers/accountController");
 const utilities = require("../utilities/");
-const regValidate = require('../utilities/account-validation'); // IMPORT VALIDATION MODULE
+const regValidate = require('../utilities/account-validation');
 
-// Route to deliver login view
+// Deliver login view
 router.get("/login", utilities.handleErrors(accountController.buildLogin));
 
-// Route to deliver registration view
+// Deliver registration view
 router.get("/register", utilities.handleErrors(accountController.buildRegister));
 
-// Process the registration data  UPDATED
+// Deliver account management view
+router.get(
+  "/", 
+  utilities.checkLogin,
+  utilities.handleErrors(accountController.buildAccountManagement)
+);
+
+// Process registration
 router.post(
   "/register",
   regValidate.registationRules(),
@@ -19,15 +26,40 @@ router.post(
   utilities.handleErrors(accountController.registerAccount)
 );
 
-
-// Process the login attempt 
+// Process login
 router.post(
   "/login",
   regValidate.loginRules(),
   regValidate.checkLoginData,
-  (req, res) => {
-    res.status(200).send('Login process not implemented yet');
-  }
+  utilities.handleErrors(accountController.accountLogin)
 );
+
+// Build account update view (protected)
+router.get(
+  "/update/:account_id", 
+  utilities.checkLogin,
+  utilities.handleErrors(accountController.buildUpdateAccount)
+);
+
+// Process account update (protected)
+router.post(
+  "/update",
+  utilities.checkLogin,
+  regValidate.updateAccountRules(),
+  regValidate.checkUpdateAccountData,
+  utilities.handleErrors(accountController.updateAccount)
+);
+
+// Process password change (protected)
+router.post(
+  "/change-password",
+  utilities.checkLogin,
+  regValidate.updatePasswordRules(),
+  regValidate.checkUpdatePasswordData,
+  utilities.handleErrors(accountController.changePassword)
+);
+
+// Logout route - FIXED: using correct method name
+router.get("/logout", utilities.handleErrors(accountController.accountLogout));
 
 module.exports = router;

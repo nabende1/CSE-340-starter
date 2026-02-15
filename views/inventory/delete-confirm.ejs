@@ -1,0 +1,22 @@
+<h1><%- title %></h1>
+<%- messages() %>
+
+<p><strong>⚠️ Confirm Deletion - This action cannot be undone!</strong></p>
+
+<form action="/inv/delete" method="POST" id="deleteForm">
+  <input type="hidden" name="inv_id" value="<%= typeof locals.inv_id !== 'undefined' ? locals.inv_id : '' %>">
+
+  <label>Make</label>
+  <input type="text" name="inv_make" readonly value="<%= typeof locals.inv_make !== 'undefined' ? locals.inv_make : '' %>">
+
+  <label>Model</label>
+  <input type="text" name="inv_model" readonly value="<%= typeof locals.inv_model !== 'undefined' ? locals.inv_model : '' %>">
+
+  <label>Year</label>
+  <input type="text" name="inv_year" readonly value="<%= typeof locals.inv_year !== 'undefined' ? locals.inv_year : '' %>">
+
+  <label>Price</label>
+  <input type="text" name="inv_price" readonly value="<%= typeof locals.inv_price !== 'undefined' ? locals.inv_price : '' %>">
+
+  <button type="submit" class="btn danger">Delete Vehicle</button>
+</form>

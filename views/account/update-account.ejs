@@ -1,0 +1,64 @@
+<h1><%- title %></h1>
+<%- messages() %>
+
+<% if (locals.errors) { %>
+  <ul class="error">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<!-- Account Update Form -->
+<form action="/account/update" method="POST" id="accountUpdateForm">
+  <input type="hidden" name="account_id" value="<%= accountData.account_id %>">
+  
+  <fieldset>
+    <legend>Account Information</legend>
+    
+    <label for="account_firstname">First Name *</label>
+    <input type="text" name="account_firstname" id="account_firstname" required
+      value="<%= typeof locals.account_firstname !== 'undefined' ? locals.account_firstname : accountData.account_firstname %>">
+
+    <label for="account_lastname">Last Name *</label>
+    <input type="text" name="account_lastname" id="account_lastname" required
+      value="<%= typeof locals.account_lastname !== 'undefined' ? locals.account_lastname : accountData.account_lastname %>">
+
+    <label for="account_email">Email Address *</label>
+    <input type="email" name="account_email" id="account_email" required
+      value="<%= typeof locals.account_email !== 'undefined' ? locals.account_email : accountData.account_email %>">
+
+    <button type="submit" class="btn primary">Update Account</button>
+  </fieldset>
+</form>
+
+<!-- Change Password Form -->
+<form action="/account/change-password" method="POST" id="passwordChangeForm">
+  <input type="hidden" name="account_id" value="<%= accountData.account_id %>">
+  
+  <fieldset>
+    <legend>Change Password</legend>
+    
+    <label for="account_password">New Password *</label>
+    <div class="password-container">
+      <input type="password" name="account_password" id="account_password" required
+        minlength="12"
+        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+        title="Password must be at least 12 characters with uppercase, number, and special character">
+      <button type="button" id="togglePassword" class="toggle-password">👁️</button>
+    </div>
+    <p class="password-requirements">
+      Password must be:
+      <ul>
+        <li>At least 12 characters long</li>
+        <li>Contain 1 uppercase letter</li>
+        <li>Contain 1 number</li>
+        <li>Contain 1 special character</li>
+      </ul>
+    </p>
+
+    <button type="submit" class="btn secondary">Change Password</button>
+  </fieldset>
+</form>
+
+<script src="/js/account.js"></script>
