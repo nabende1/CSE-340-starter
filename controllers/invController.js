@@ -320,4 +320,38 @@ invCont.deleteInventory = async function (req, res, next) {
   }
 };
 
+/* ****************************************
+ *  Build inventory detail view
+ * ************************************ */
+async function buildDetail(req, res, next) {
+  try {
+    const inv_id = parseInt(req.params.invId);
+    let nav = await utilities.getNav();
+    
+    // Get vehicle details
+    const vehicleData = await invModel.getInventoryById(inv_id);
+    
+    if (!vehicleData) {
+      req.flash("error", "Vehicle not found.");
+      return res.redirect("/inv");
+    }
+    
+    // Build the vehicle detail HTML
+    const detailHTML = await utilities.buildDetailGrid(vehicleData);
+    
+    res.render("./inventory/detail", {
+      title: `${vehicleData.inv_make} ${vehicleData.inv_model}`,
+      nav,
+      detailHTML,
+      inv_id: vehicleData.inv_id, // 👈 THIS IS CRITICAL - pass the ID
+      vehicle: vehicleData,       // Also pass the full vehicle object
+      errors: null
+    });
+    
+  } catch (error) {
+    console.error("buildDetail error:", error);
+    next(error);
+  }
+}
+
 module.exports = invCont;

@@ -1,0 +1,45 @@
+<!-- views/contact/messages.ejs -->
+<h1><%- title %></h1>
+<%- messages() %> <!-- ✅ This is now the flash message function -->
+
+<% if (customerMessages.length > 0) { %> <!-- ✅ Renamed variable -->
+  <div class="messages-list">
+    <% customerMessages.forEach(msg => { %> <!-- ✅ Renamed variable -->
+      <div class="message-item">
+        <div class="message-header">
+          <strong><%= msg.message_name %></strong> 
+          &lt;<%= msg.message_email %>&gt;
+          <span class="message-date"><%= new Date(msg.message_date).toLocaleString() %></span>
+        </div>
+        <div class="message-subject"><strong><%= msg.message_subject %></strong></div>
+        <div class="message-body"><%= msg.message_body %></div>
+      </div>
+    <% }) %>
+  </div>
+<% } else { %>
+  <p>No customer messages yet.</p>
+<% } %>
+
+<style>
+.messages-list { margin-top: 2rem; }
+.message-item { 
+  border: 1px solid #ddd; 
+  padding: 1rem; 
+  margin-bottom: 1rem; 
+  border-radius: 6px;
+}
+.message-header { 
+  display: flex; 
+  justify-content: space-between; 
+  margin-bottom: 0.5rem; 
+  font-weight: bold;
+}
+.message-date { 
+  color: #666; 
+  font-size: 0.9rem;
+}
+.message-subject { 
+  margin: 0.5rem 0; 
+  color: var(--main-accent);
+}
+</style>

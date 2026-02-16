@@ -22,6 +22,8 @@ Util.getNav = async function () {
     data.rows.forEach((row) => {
       list += `<li><a href="/inv/type/${row.classification_id}" title="See ${row.classification_name} vehicles">${row.classification_name}</a></li>`;
     });
+    // Add Contact link here - after the classification links
+    list += '<li><a href="/contact" title="Contact us">Contact</a></li>';
     list += "</ul>";
     return list;
   } catch (error) {
@@ -37,7 +39,10 @@ Util.buildClassificationGrid = async function(data) {
   let grid;
   if (data.length > 0) {
     grid = '<ul id="inv-display">';
-    data.forEach(vehicle => { 
+    for (const vehicle of data) {
+      // Get average rating for this vehicle
+      const avgRating = await this.getAverageRating(vehicle.inv_id);
+      
       grid += '<li>';
       grid += `<a href="/inv/detail/${vehicle.inv_id}" title="View ${vehicle.inv_make} ${vehicle.inv_model} details">`;
       grid += `<img src="${vehicle.inv_thumbnail}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model} on CSE Motors" />`;
@@ -45,10 +50,18 @@ Util.buildClassificationGrid = async function(data) {
       grid += '<div class="namePrice">';
       grid += '<hr />';
       grid += `<h2><a href="/inv/detail/${vehicle.inv_id}" title="View ${vehicle.inv_make} ${vehicle.inv_model} details">${vehicle.inv_make} ${vehicle.inv_model}</a></h2>`;
+      
+      // Add star rating display
+      if (avgRating.total_reviews > 0) {
+        const stars = '★'.repeat(Math.round(avgRating.average_rating)) + 
+                     '☆'.repeat(5 - Math.round(avgRating.average_rating));
+        grid += `<div class="rating">${stars} (${avgRating.total_reviews})</div>`;
+      }
+      
       grid += `<span>$${new Intl.NumberFormat('en-US').format(vehicle.inv_price)}</span>`;
       grid += '</div>';
       grid += '</li>';
-    });
+    }
     grid += '</ul>';
   } else { 
     grid = '<p class="notice">Sorry, no matching vehicles could be found.</p>';
@@ -128,7 +141,7 @@ Util.buildDetailGrid = async function(vehicle) {
             <span class="value">${vehicle.inv_mpg_city}/${vehicle.inv_mpg_highway} (City/Hwy)</span>
           </div>
         </div>
-
+        
         <div class="description">
           <h3>Description</h3>
           <p>${vehicle.inv_description}</p>
@@ -201,6 +214,20 @@ Util.checkEmployeeOrAdmin = (req, res, next) => {
   } else {
     req.flash("notice", "Access denied. Employee or Admin privileges required.");
     return res.redirect("/account/login");
+  }
+};
+
+/* **************************************
+* Get average rating for vehicle
+* ************************************ */
+Util.getAverageRating = async function(inv_id) {
+  try {
+    const reviewModel = require("../models/reviewModel");
+    const result = await reviewModel.getAverageRating(inv_id);
+    return result.rows[0] || { average_rating: 0, total_reviews: 0 };
+  } catch (error) {
+    console.error("Error fetching average rating:", error);
+    return { average_rating: 0, total_reviews: 0 };
   }
 };
 
